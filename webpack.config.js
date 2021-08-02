@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    port: 3300,
+    port: 1234,
     contentBase: path.resolve(__dirname, 'src'),
     open: true,
   },
@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.(gif|png|jpg|jpeg|svg|bmp)$/i,
-        type: 'asset/resource',
+        type: 'asset/resources',
       },
     ],
   },
