@@ -75,3 +75,5 @@ typings/
 
 # FuseBox cache
 .fusebox/
+dist/index.html
+dist/main.bundle.js
