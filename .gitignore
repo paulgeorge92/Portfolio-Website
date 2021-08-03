@@ -31,7 +31,6 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-dist
 
 # Dependency directories
 node_modules/
@@ -75,5 +74,6 @@ typings/
 
 # FuseBox cache
 .fusebox/
-dist/index.html
-dist/main.bundle.js
+
+# distribution files
+/dist/**/*.*
