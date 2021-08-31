@@ -77,3 +77,4 @@ typings/
 
 # distribution files
 /dist/**/*.*
+src/js/data.js
