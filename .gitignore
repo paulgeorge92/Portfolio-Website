@@ -77,3 +77,4 @@ typings/
 .fusebox/
 dist/index.html
 dist/main.bundle.js
+src/js/data.js
