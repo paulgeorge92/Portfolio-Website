@@ -6,61 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paul George Pullormadam</title>
-
-    <!-- CDN CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./js/data.js"></script>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
-    <!-- Google Fonts -->
     <style>
-        .loading__screen {
-            height: 100vh;
-            width: 100vw;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            background-color: #FFF;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lds-ripple {
-            display: inline-block;
-            position: relative;
-            width: 80px;
-            height: 80px;
-        }
-
-        .lds-ripple div {
-            position: absolute;
-            border: 4px solid var(--first-color);
-            opacity: 1;
-            border-radius: 50%;
-            animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-        }
-
-        .lds-ripple div:nth-child(2) {
-            animation-delay: -0.5s;
-        }
-
-        @keyframes lds-ripple {
-            0% {
-                top: 36px;
-                left: 36px;
-                width: 0;
-                height: 0;
-                opacity: 1;
-            }
-
-            100% {
-                top: 0px;
-                left: 0px;
-                width: 72px;
-                height: 72px;
-                opacity: 0;
-            }
-        }
+        .loading__screen{height:100vh;width:100vw;position:fixed;top:0;left:0;z-index:9999;background-color:#fff;display:flex;justify-content:center;align-items:center}.lds-ripple{display:inline-block;position:relative;width:80px;height:80px}.lds-ripple div{position:absolute;border:4px solid var(--first-color);opacity:1;border-radius:50%;animation:lds-ripple 1s cubic-bezier(0,.2,.8,1) infinite}.lds-ripple div:nth-child(2){animation-delay:-.5s}@keyframes lds-ripple{0%{top:36px;left:36px;width:0;height:0;opacity:1}100%{top:0;left:0;width:72px;height:72px;opacity:0}}
     </style>
 
 
@@ -143,7 +93,7 @@
                                 165.547 130.807 187.559 100.226 186.353C69.6454 185.297 41.0228 161.023 21.7403 
                                 129.362C2.45775 97.8511 -7.48481 59.1033 6.67581 34.5279C20.9871 10.1032 59.7028 
                                 -0.149132 97.9666 0.00163737C136.23 0.303176 174.193 10.857 190.312 36.4879Z" />
-                                <image class="home__blob-img" x="12" y="18" xlink:href="img/perfil.webp" />
+                                <image class="home__blob-img" x="12" y="18" xlink:href="./img/perfil.webp" />
                             </g>
                         </svg>
 
@@ -171,7 +121,7 @@
             <span class="section__subtitle">My Introduction</span>
 
             <div class="about__container grid container">
-                <img src="img/about.webp" alt="" class="about__img" />
+                <img src="" alt="" class="about__img" />
                 <div class="about__data">
                     <p class="about__description"></p>
                     <div class="about__info">
@@ -274,67 +224,6 @@
             <span class="section__subtitle">Most recent works</span>
             <div class="portfolio__container container swipper-container">
                 <div class="swiper-wrapper">
-                    <!--==================== PORTFOLIO 1 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="img/neumorphism_bootstrap.webp" alt="" class="portfolio__img">
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">Neumorphism in Bootstrap 4</h3>
-                            <p class="portfolio__description">Neumorphism design applied in bootstrap 4 components. Neumorphism is a visual style that combines background colors, shapes, gradients, highlights, and shadows to ensure graphic intense buttons and switches </p>
-                            <a href="https://projects.paul-george.me/bootstrap_neumorph/" target="_blank" rel="noopener noreferrer" class="button button--flex button--small portfolio__button">View <i class="uil uil-arrow-right button__icon"></i></a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 2 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="img/periodic_table.png" alt="" class="portfolio__img">
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">HTML 5 Periodic Table</h3>
-                            <p class="portfolio__description">If you're interested in learning HTML or already know HTML but want to find out which elements are in use in HTML 5, then you might find this useful. The colorful table is laid out in a similar style to the scientific periodic table of elements.</p>
-                            <a href="https://projects.paul-george.me/html_periodic_table/" class="button button--flex button--small portfolio__button" target="_blank" rel="noopener noreferrer">View <i class="uil uil-arrow-right button__icon"></i></a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 3 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="img/support_card.webp" alt="" class="portfolio__img">
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">Contact Card</h3>
-                            <p class="portfolio__description">HTML Snippet for stylish Contact Card</p>
-                            <a href="https://codepen.io/paul_george/pen/eYWRKWv" class="button button--flex button--small portfolio__button" target="_blank" rel="noopener noreferrer">View <i class="uil uil-arrow-right button__icon"></i></a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 4 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="img/profile_card.webp" alt="" class="portfolio__img">
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">Profile Card Component</h3>
-                            <p class="portfolio__description">Card component created using glassmorphism design trend</p>
-                            <a href="https://codepen.io/paul_george/pen/vYmZEge" class="button button--flex button--small portfolio__button" target="_blank" rel="noopener noreferrer">View <i class="uil uil-arrow-right button__icon"></i></a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 5 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="img/file_upload.webp" alt="" class="portfolio__img">
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">Custom File Upload Design</h3>
-                            <p class="portfolio__description">Appealing UI Design for file upload progress created using HTML and CSS</p>
-                            <a href="https://codepen.io/paul_george/pen/xxdLmOK" class="button button--flex button--small portfolio__button" target="_blank" rel="noopener noreferrer">View <i class="uil uil-arrow-right button__icon"></i></a>
-                        </div>
-                    </div>
-
-                    <!--==================== PORTFOLIO 6 ====================-->
-                    <div class="portfolio__content grid swiper-slide">
-                        <img src="img/3d_card.webp" alt="" class="portfolio__img">
-                        <div class="portfolio__data">
-                            <h3 class="portfolio__title">#D Inventory Card</h3>
-                            <p class="portfolio__description">Card Design for Inventory using Bootstrap 3</p>
-                            <a href="https://codepen.io/paul_george/pen/OJPwQEp" class="button button--flex button--small portfolio__button" target="_blank" rel="noopener noreferrer">View <i class="uil uil-arrow-right button__icon"></i></a>
-                        </div>
-                    </div>
-
-
                 </div>
                 <!-- Arrows -->
                 <div class="swiper-button-next">
@@ -376,99 +265,7 @@
             <span class="section__subtitle">My client says</span>
 
             <div class="testimonial__container container swipper-container">
-                <div class="swiper-wrapper">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial__content swiper-slide">
-                        <div class="testimonial__data">
-                            <div class="testimonial__stars">
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                            </div>
-                            <p class="testimonial__description">
-                                It has been an absolute delight working with you. Your meticulous attention to detail and your nature of going the extra mile to attend to even the smallest of tasks is what sets you apart.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial__content swiper-slide">
-                        <div class="testimonial__data">
-                            <div class="testimonial__stars">
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                            </div>
-                            <p class="testimonial__description">
-                                Having worked with many developers in my past projects, I can say that Paul is clearly in the top tier. He has deep knowledge in UI development and a high level of expertise in html, css, js technologies. I was very impressed with his work. He was very clear on what could and couldn't be done and communicated that clearly. He also showed a deep commitment by researching and investigating issues and coming back with answers and options.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial__content swiper-slide">
-                        <div class="testimonial__data">
-                            <div class="testimonial__stars">
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                            </div>
-                            <p class="testimonial__description">
-                                Paul was very responsive, very easy and nice to work with and as said above I am extremely pleased with the end product. I am particularly grateful for how easy the site is for my team to manage and update since this program will evolve over time, it was critical to ensure updates were easy and quick to complete.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Testimonial 4 -->
-                    <div class="testimonial__content swiper-slide">
-                        <div class="testimonial__data">
-                            <div class="testimonial__stars">
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                            </div>
-                            <p class="testimonial__description">
-                                One of the best talented folks in my team who has always excelled when situation thrives. He always strives to deliver exceptional client service which has earned him rewards. Better Begins With You (BBWY) award the most prestigious award in EY is a testament of his great work in EY. He is technically strong and always delivered quality output which was widely acknowledged by architects.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Testimonial 5 -->
-                    <div class="testimonial__content swiper-slide">
-                        <div class="testimonial__data">
-                            <div class="testimonial__stars">
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                            </div>
-                            <p class="testimonial__description">
-                                During my short association with Paul, the main aspect i noticed was the vigor and rigor he exhibited in collecting and learning new concepts and platforms in computing. This is one thing that can take him places. I strongly recommend him for any technical activity on that regard.
-                            </p>
-                        </div>
-                    </div>
-                    <!-- Testimonial 6 -->
-                    <div class="testimonial__content swiper-slide">
-                        <div class="testimonial__data">
-                            <div class="testimonial__stars">
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                                <i class="uil uil-star testimonial__icon-star"></i>
-                            </div>
-                            <p class="testimonial__description">
-                                Thanks to Paul for his flexibility and fantastic customer service offered throughout the project- ends up in a very high calibre site.
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-wrapper"></div>
                 <div class="swiper-pagination swiper-pagination-testimonial"></div>
             </div>
 

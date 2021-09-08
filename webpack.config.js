@@ -5,17 +5,18 @@ module.exports = {
     main: path.resolve(__dirname, './src/app.js'),
   },
   output: {
-    filename: '[name].bundle.js',
+    filename: '[contenthash].js',
+    chunkFilename: '[contenthash].js',
+    assetModuleFilename: "[contenthash][ext][query]",
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    port: 1234,
+    port: 1111,
     contentBase: path.resolve(__dirname, 'src'),
     open: true,
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
@@ -30,8 +31,15 @@ module.exports = {
         },
       },
       {
-        test: /\.(gif|png|jpg|jpeg|svg|bmp)$/i,
-        type: 'asset/resources',
+        test: /\.(gif|png|jpg|jpeg|svg|bmp|webp)$/i,
+        //type: 'assets/resources',
+        use: [{
+          loader: 'url-loader',
+          options: {
+            limit: 8000,
+            name: 'assets/img/[hash].[ext]',
+          }
+        }]
       },
     ],
   },

@@ -77,4 +77,6 @@ typings/
 
 # distribution files
 /dist/**/*.*
+
+#datastore
 src/js/data.js
