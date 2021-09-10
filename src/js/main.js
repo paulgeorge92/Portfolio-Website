@@ -2,16 +2,21 @@ import Swiper from 'swiper/bundle';
 import profilePic from './../assets/img/perfil.webp';
 import aboutMePic from './../assets/img/about.webp';
 import homeBg from './../assets/img/web-dev-04.png';
+import 'regenerator-runtime/runtime'
+import './data'
+(async function () {
 
-(function () {
-  if(!String.prototype.replaceAll){
-    String.prototype.replaceAll = function(a, b){
+
+  if (!String.prototype.replaceAll) {
+    String.prototype.replaceAll = function (a, b) {
       var reg = new RegExp(a, 'g')
       return this.replace(reg, b);
     }
   }
   try {
     const dataStore = new DataStore();
+
+    await dataStore.init();
 
     //#region ELEMENTS STORE
     const HOME_SUBTITLE = document.querySelector('.home__subtitle');
@@ -20,16 +25,16 @@ import homeBg from './../assets/img/web-dev-04.png';
     const NAV_TOGGLE = document.getElementById('nav-toggle');
     const NAV_CLOSE = document.getElementById('nav-close');
     const NAV_LINK = document.querySelectorAll('.nav__link');
-  
+
     const ABOUT_DESCRIPTION = document.querySelector('.about__description');
     const EXPERIENCE_COUNT = document.querySelector('.about__info-title.experience');
     const PROJECTS_COUNT = document.querySelector('.about__info-title.projects');
     const AWARDS_COUNT = document.querySelector('.about__info-title.awards');
     const CV_LINK = document.querySelector('.cv--link');
-  
+
     const FRONTEND_SKILLS = document.querySelector('.skills__content.frontend');
     const BACKEND_SKILLS = document.querySelector('.skills__content.backend');
-  
+
     const SKILLS_CONTENT = document.getElementsByClassName('skills__content');
     const SKILLS_HEADER = document.querySelectorAll('.skills__header');
     const TABS = document.querySelectorAll('[data-target');
@@ -42,57 +47,57 @@ import homeBg from './../assets/img/web-dev-04.png';
     const LINKEDIN_LINK = document.querySelectorAll('.linked-in');
     const GITHUB_LINK = document.querySelectorAll('.github');
     const INSTAGRAM_LINK = document.querySelectorAll('.ig');
-  
+
     //#endregion
-  
+
     document.querySelector('.home__blob-img').setAttribute('xlink:href', profilePic);
     document.querySelector('.about__img').setAttribute('src', aboutMePic);
     document.querySelector('.home__container').style.backgroundImage = `url(${homeBg})`
-  
+
     //#region DATA BINDING
     HOME_SUBTITLE.textContent = dataStore.get_data('Title');
     HOME_DESCRIPTION.textContent = dataStore.get_data('Description');
-  
+
     //Updateing Social Links
     const socialLinks = dataStore.get_data('SocialLinks');
     FACEBOOK_LINK.forEach(link => link.href = socialLinks.Facebook);
     LINKEDIN_LINK.forEach(link => link.href = socialLinks.LinkedIn);
     GITHUB_LINK.forEach(link => link.href = socialLinks.Github);
     INSTAGRAM_LINK.forEach(link => link.href = socialLinks.Instagram);
-  
+
     //Updating About Me Section
     ABOUT_DESCRIPTION.textContent = dataStore.get_data('AboutMe');
-    EXPERIENCE_COUNT.textContent = `${dataStore.get_data('ExperienceInNumber')}+`;
+    EXPERIENCE_COUNT.textContent = `${dataStore.get_experience()}+`;
     PROJECTS_COUNT.textContent = `${dataStore.get_data('ProjectsCompleted')}+`;
     AWARDS_COUNT.textContent = `${dataStore.get_data('AwardsRecieved')}+`;
     CV_LINK.href = dataStore.get_cv();
-  
+
     //Updating Skills Section
     const skills = dataStore.get_data('Skills');
     FRONTEND_SKILLS.querySelector('.skills__subtitle').textContent = skills.FrontEnd.caption;
     BACKEND_SKILLS.querySelector('.skills__subtitle').textContent = skills.Backend.caption;
-  
+
     const skillTemplate = `<div class="skills__data"><div class="skills__title"><h3 class="skills__name">__name</h3><span class="skills__number">__confidence%</span></div><div class="skills__bar"><span class="skills__percentage" style="width: __confidence%"></span></div></div>`
-  
+
     const frontEndSkillContainer = FRONTEND_SKILLS.querySelector('.skills__list');
     frontEndSkillContainer.innerHTML = '';
     skills.FrontEnd.skills.forEach(skill => {
       let html = skillTemplate.replaceAll('__name', skill.name).replaceAll('__confidence', skill.confidence);
       frontEndSkillContainer.innerHTML += html;
     });
-  
+
     const backEndSkillContainer = BACKEND_SKILLS.querySelector('.skills__list');
     backEndSkillContainer.innerHTML = '';
     skills.Backend.skills.forEach(skill => {
       let html = skillTemplate.replaceAll('__name', skill.name).replaceAll('__confidence', skill.confidence);
       backEndSkillContainer.innerHTML += html;
     });
-  
+
     //Updating Qualifications
     const qualificationOddTemplate = `<div class="qualification__data"><div><h3 class="qualification__title">__name</h3><span class="qualification__subtitle">__subTitle</span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i>__year</div></div><div><span class="qualification__rounder"></span><span class="qualification__line"></span></div></div>`
-  
+
     const qualificationEvenTemplate = `<div class="qualification__data"><div></div><div><span class="qualification__rounder"></span><span class="qualification__line"></span></div><div><h3 class="qualification__title">__name</h3><span class="qualification__subtitle">__subTitle</span><div class="qualification__calendar"><i class="uil uil-calendar-alt"></i>__year</div></div></div>`
-  
+
     const educationList = document.querySelector('.qualification__content#education');
     const education = dataStore.get_data('Education').reverse();
     educationList.innerHTML = '';
@@ -101,8 +106,8 @@ import homeBg from './../assets/img/web-dev-04.png';
       let html = template.replaceAll('__name', course.title).replaceAll('__subTitle', course.caption).replaceAll('__year', course.year);
       educationList.innerHTML += html;
     });
-  
-  
+
+
     const workList = document.querySelector('.qualification__content#work');
     const jobs = dataStore.get_data('Jobs').reverse();
     workList.innerHTML = '';
@@ -111,41 +116,41 @@ import homeBg from './../assets/img/web-dev-04.png';
       let html = template.replaceAll('__name', job.title).replaceAll('__subTitle', job.company).replaceAll('__year', job.year);
       workList.innerHTML += html;
     });
-  
-  
+
+
     //Updating portfolio
     const portfolioTemplate = `<div class="portfolio__content grid swiper-slide"><img src="__imgPath" alt="" class="portfolio__img"><div class="portfolio__data"><h3 class="portfolio__title">__name</h3><p class="portfolio__description">__description</p><a href="__link" target="_blank" rel="noopener noreferrer" class="button button--flex button--small portfolio__button">View <i class="uil uil-arrow-right button__icon"></i></a></div></div>`
-  
+
     const portfolio_container = document.querySelector('.portfolio__container .swiper-wrapper');
-  
+
     portfolio_container.innerHTML = '';
     const portfolios = dataStore.get_data('Portfolio').reverse();
-  
+
     portfolios.forEach((portfolio, index) => {
       let html = portfolioTemplate.replaceAll('__imgPath', portfolio.image).replaceAll('__name', portfolio.name).replaceAll('__description', portfolio.description).replaceAll('__link', portfolio.link);
       portfolio_container.innerHTML += html;
     });
-  
-  
+
+
     //Updating Testimonials
-  
+
     const testimonialTemplate = `<div class="testimonial__content swiper-slide"><div class="testimonial__data"><div class="testimonial__stars"><i class="uil uil-star testimonial__icon-star"></i><i class="uil uil-star testimonial__icon-star"></i><i class="uil uil-star testimonial__icon-star"></i><i class="uil uil-star testimonial__icon-star"></i><i class="uil uil-star testimonial__icon-star"></i></div><p class="testimonial__description">__testimonial</p></div></div>`
-  
+
     const testimonails = dataStore.get_data('Testimonials').reverse().map(testimonial => testimonialTemplate.replaceAll('__testimonial', testimonial));
-  
+
     document.querySelector('.testimonial__container .swiper-wrapper').innerHTML = '';
     document.querySelector('.testimonial__container .swiper-wrapper').innerHTML = testimonails.join('');
-  
-  
-  
-  
+
+
+
+
     //#endregion
-  
-  
+
+
     //#region MENU SHOW Y HIDDEN
-    
+
     //#endregion  
-  
+
     //#region MENU SHOW
     /* Validate if constant exists */
     if (NAV_TOGGLE) {
@@ -154,7 +159,7 @@ import homeBg from './../assets/img/web-dev-04.png';
       });
     }
     //#endregion
-  
+
     //#region MENU HIDDEN
     /* Validate if constant exists */
     if (NAV_CLOSE) {
@@ -163,7 +168,7 @@ import homeBg from './../assets/img/web-dev-04.png';
       });
     }
     //#endregion
-  
+
     //#region REMOVE MENU MOBILE
     function linkAction() {
       const NAV_MENU = document.getElementById('nav-menu');
@@ -172,11 +177,11 @@ import homeBg from './../assets/img/web-dev-04.png';
     }
     NAV_LINK.forEach((n) => n.addEventListener('click', linkAction));
     //#endregion
-  
+
     //#region ACCORDION SKILLS
     function toggleSkills() {
       let itemClass = this.parentNode.className;
-  
+
       /* for (let i = 0; i < SKILLS_CONTENT.length; i++) {
         SKILLS_CONTENT[i].classList.add('skills__close');
       } */
@@ -188,22 +193,22 @@ import homeBg from './../assets/img/web-dev-04.png';
         this.parentNode.classList.remove('skills__close');
       }
     }
-  
+
     SKILLS_HEADER.forEach((el) => {
       el.addEventListener('click', toggleSkills);
     });
     //#endregion
-  
+
     //#region QUALIFICATION TABS
     TABS.forEach((tab) => {
       tab.addEventListener('click', () => {
         const target = document.querySelector(tab.dataset.target);
-  
+
         TAB_CONTENTS.forEach((tabContent) => {
           tabContent.classList.remove('qualification__active');
         });
         target.classList.add('qualification__active');
-  
+
         TABS.forEach((tab) => {
           tab.classList.remove('qualification__active');
         });
@@ -211,7 +216,7 @@ import homeBg from './../assets/img/web-dev-04.png';
       });
     });
     //#endregion
-  
+
     //#region PORTFOLIO SWIPER
     const portfolioSwiper = new Swiper('.portfolio__container', {
       cssMode: true,
@@ -228,7 +233,7 @@ import homeBg from './../assets/img/web-dev-04.png';
       keyboard: true,
     });
     //#endregion
-  
+
     //#region TESTIMONIAL
     const testimonialSlider = new Swiper('.testimonial__container', {
       loop: true,
@@ -242,16 +247,16 @@ import homeBg from './../assets/img/web-dev-04.png';
       keyboard: true,
     });
     //#endregion
-  
+
     //#region SCROLL SECTIONS ACTIVE LINK
     function scrollActive() {
       const scrollY = window.pageYOffset;
-  
+
       SECTIONS.forEach((current) => {
         const sectionHeight = current.offsetHeight;
         const sectionTop = current.offsetTop - 50;
         const sectionId = current.getAttribute('id');
-  
+
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
           document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link');
         } else {
@@ -261,7 +266,7 @@ import homeBg from './../assets/img/web-dev-04.png';
     }
     window.addEventListener('scroll', scrollActive);
     //#endregion
-  
+
     //#region CHANGE BACKGROUND HEADER
     function scrollHeader() {
       const NAV = document.getElementById('header');
@@ -271,7 +276,7 @@ import homeBg from './../assets/img/web-dev-04.png';
     }
     window.addEventListener('scroll', scrollHeader);
     //#endregion
-  
+
     //#region SHOW SCROLL UP
     function scrollUp() {
       const SCROLL_UP = document.getElementById('scroll-up');
@@ -281,23 +286,23 @@ import homeBg from './../assets/img/web-dev-04.png';
     }
     window.addEventListener('scroll', scrollUp);
     //#endregion
-  
+
     //#region DARK LIGHT THEME
     // Previously selected topic (if user selected)
     const SELECTED_THEME = localStorage.getItem('selected-theme');
     const SELECTED_ICON = localStorage.getItem('selected-icon');
-  
+
     // We obtain the current theme that the interface has by validating the dark-theme class
     const getCurrentTheme = () => (document.body.classList.contains(DARK_THEME) ? 'dark' : 'light');
     const getCurrentIcon = () => (THEME_BUTTON.classList.contains(ICON_THEME) ? 'uil-moon' : 'uil-sun');
-  
+
     // We validate if the user previously chose a topic
     if (SELECTED_THEME) {
       // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
       document.body.classList[SELECTED_THEME === 'dark' ? 'add' : 'remove'](DARK_THEME);
       THEME_BUTTON.classList[SELECTED_ICON === 'uil-moon' ? 'add' : 'remove'](ICON_THEME);
     }
-  
+
     // Activate / deactivate the theme manually with the button
     THEME_BUTTON.addEventListener('click', () => {
       // Add or remove the dark / icon theme
@@ -312,5 +317,5 @@ import homeBg from './../assets/img/web-dev-04.png';
   } catch (error) {
     console.log(error);
   }
-  
+
 }())

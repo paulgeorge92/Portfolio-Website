@@ -79,4 +79,4 @@ typings/
 /dist/**/*.*
 
 #datastore
-src/js/data.js
+src/js/data.json
