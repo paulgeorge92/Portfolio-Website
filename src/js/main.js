@@ -25,6 +25,9 @@ import './data'
     const NAV_TOGGLE = document.getElementById('nav-toggle');
     const NAV_CLOSE = document.getElementById('nav-close');
     const NAV_LINK = document.querySelectorAll('.nav__link');
+    const HOME_SOCIAL = document.querySelector(".home__social");
+    const FOOTER_SOCIAL = document.querySelector(".footer__socials");
+
 
     const ABOUT_DESCRIPTION = document.querySelector('.about__description');
     const EXPERIENCE_COUNT = document.querySelector('.about__info-title.experience');
@@ -59,11 +62,17 @@ import './data'
     HOME_DESCRIPTION.textContent = dataStore.get_data('Description');
 
     //Updateing Social Links
-    const socialLinks = dataStore.get_data('SocialLinks');
-    FACEBOOK_LINK.forEach(link => link.href = socialLinks.Facebook);
-    LINKEDIN_LINK.forEach(link => link.href = socialLinks.LinkedIn);
-    GITHUB_LINK.forEach(link => link.href = socialLinks.Github);
-    INSTAGRAM_LINK.forEach(link => link.href = socialLinks.Instagram);
+    const socialLinks = dataStore.get_socialLinks();
+    const footerSocialHtml = `<a href="__link" target="_blank" rel="noopener noreferrer" class="footer__social"><i class="uil __icon"></i></a>`;
+    const homeSocialHtml = `<a href="__link" target="_blank" rel="noopener noreferrer" class="home__social-icon"><i class="uil __icon"></i></a>`
+    socialLinks.forEach(link => {
+      let homeLink = homeSocialHtml.replaceAll('__link', link.url).replaceAll('__icon', link.icon);
+      HOME_SOCIAL.innerHTML += homeLink;
+      if (link.showInFooter) {
+        let footerLink = footerSocialHtml.replaceAll('__link', link.url).replaceAll('__icon', link.icon);
+        FOOTER_SOCIAL.innerHTML += footerLink;
+      }
+    });
 
     //Updating About Me Section
     ABOUT_DESCRIPTION.textContent = dataStore.get_data('AboutMe');
@@ -313,6 +322,47 @@ import './data'
       localStorage.setItem('selected-icon', getCurrentIcon());
     });
     //#endregion
+
+    const CONTACT_FORM = document.getElementById('contact-text-form-form');
+
+    CONTACT_FORM.addEventListener("submit", (e) => {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      let data = [];
+      const inputs = document.querySelectorAll('.contact__input');
+      inputs.forEach((ctrl) => {
+        data.push({
+          name: ctrl.getAttribute('data-field'),
+          value: ctrl.value,
+          name_attr: ctrl.getAttribute('name')
+        });
+      });
+
+      let form = new FormData();
+      form.append('data', JSON.stringify(data));
+      form.append('id', 'contact-text-form-form');
+      var action = CONTACT_FORM.getAttribute('action');
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', action, true);
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          let response = JSON.parse(this.response);
+          if (response.status == 200) {
+            document.getElementById("contact__btn_text").textContent = "Message Sent!";
+            CONTACT_FORM.reset();
+          }
+          else {
+            document.getElementById("contact__btn_text").textContent = "Try again later..."
+          }
+
+        }
+
+      }
+      xhr.send(form);
+      return false;
+    });
+
     document.getElementById('loader').style.display = 'none';
   } catch (error) {
     console.log(error);

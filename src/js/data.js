@@ -44,7 +44,6 @@ window.DataStore = function () {
         AGE = moment().diff(moment(DOB), 'y', false);
         EXPERIENCE = moment().diff(moment(CAREER_START), 'y', false);
         EXPERIENCE_FORMATTED = EXPERIENCE < 10 ? NUMBER_STRINGS[EXPERIENCE] : EXPERIENCE.toString();
-        console.log(res);
         data = res.data;
 
         data.Description = eval(data.Description);
@@ -63,4 +62,5 @@ window.DataStore = function () {
     this.get_contact = () => CONTACT_NUMBER;
     this.get_email = () => EMAIL;
     this.get_cv = () => CV_PATH;
+    this.get_socialLinks = () => data.SocialLinks.filter(a => a.active).sort((a, b) => a.order - b.order);
 }
