@@ -128,9 +128,9 @@ import './data'
 
 
     //Updating portfolio
-    const portfolioTemplate = `<div class="portfolio__content grid swiper-slide"><img src="__imgPath" alt="" class="portfolio__img"><div class="portfolio__data"><h3 class="portfolio__title">__name</h3><p class="portfolio__description">__description</p><a href="__link" target="_blank" rel="noopener noreferrer" class="button button--flex button--small portfolio__button">View <i class="uil uil-arrow-right button__icon"></i></a></div></div>`
+    const portfolioTemplate = `<div class="portfolio__content"><div class="portfolio__img_box"><div class="cf-inner"><div class="portfolio__img" style="background-image: url(__imgPath);"></div></div></div><div class="portfolio__data"><a class="cf-inner" href="__link" target="_blank" rel="noopener noreferrer"><div class="inner"><h2 class="portfolio__title">__name</h2></div></a></div></div>`
 
-    const portfolio_container = document.querySelector('.portfolio__container .swiper-wrapper');
+    const portfolio_container = document.querySelector('.portfolio__container');
 
     portfolio_container.innerHTML = '';
     const portfolios = dataStore.get_data('Portfolio').reverse();
@@ -227,7 +227,7 @@ import './data'
     //#endregion
 
     //#region PORTFOLIO SWIPER
-    const portfolioSwiper = new Swiper('.portfolio__container', {
+    /* const portfolioSwiper = new Swiper('.portfolio__container', {
       cssMode: true,
       loop: true,
       navigation: {
@@ -240,7 +240,7 @@ import './data'
       },
       mousewheel: true,
       keyboard: true,
-    });
+    }); */
     //#endregion
 
     //#region TESTIMONIAL
