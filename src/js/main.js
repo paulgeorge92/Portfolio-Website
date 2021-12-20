@@ -151,7 +151,9 @@ import './data'
     document.querySelector('.testimonial__container .swiper-wrapper').innerHTML = testimonails.join('');
 
 
-
+    document.getElementById("contact__mobile").innerText = dataStore.get_contact();
+    document.getElementById("contact__email").innerText = dataStore.get_email();
+    document.getElementById("contact__location").innerText = dataStore.get_location();
 
     //#endregion
 
@@ -298,19 +300,24 @@ import './data'
 
     //#region DARK LIGHT THEME
     // Previously selected topic (if user selected)
-    const SELECTED_THEME = localStorage.getItem('selected-theme');
-    const SELECTED_ICON = localStorage.getItem('selected-icon');
+    let SELECTED_THEME = localStorage.getItem('selected-theme');
+    let SELECTED_ICON = localStorage.getItem('selected-icon');
 
     // We obtain the current theme that the interface has by validating the dark-theme class
     const getCurrentTheme = () => (document.body.classList.contains(DARK_THEME) ? 'dark' : 'light');
     const getCurrentIcon = () => (THEME_BUTTON.classList.contains(ICON_THEME) ? 'uil-moon' : 'uil-sun');
 
     // We validate if the user previously chose a topic
-    if (SELECTED_THEME) {
-      // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-      document.body.classList[SELECTED_THEME === 'dark' ? 'add' : 'remove'](DARK_THEME);
-      THEME_BUTTON.classList[SELECTED_ICON === 'uil-moon' ? 'add' : 'remove'](ICON_THEME);
+    if (!SELECTED_THEME) {
+      console.log(window.matchMedia("(prefers-color-scheme:dark)"))
+      if (window.matchMedia("(prefers-color-scheme:dark)")?.matches) {
+        SELECTED_THEME = 'dark';
+        SELECTED_ICON = 'uil-moon';
+      }
     }
+    // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
+    document.body.classList[SELECTED_THEME === 'dark' ? 'add' : 'remove'](DARK_THEME);
+    THEME_BUTTON.classList[SELECTED_ICON === 'uil-moon' ? 'add' : 'remove'](ICON_THEME);
 
     // Activate / deactivate the theme manually with the button
     THEME_BUTTON.addEventListener('click', () => {
@@ -322,6 +329,8 @@ import './data'
       localStorage.setItem('selected-icon', getCurrentIcon());
     });
     //#endregion
+
+    //#region CONTACT ME
 
     const CONTACT_FORM = document.getElementById('contact-text-form-form');
 
@@ -362,6 +371,8 @@ import './data'
       xhr.send(form);
       return false;
     });
+
+    //#endregion
 
     document.getElementById('loader').style.display = 'none';
   } catch (error) {
