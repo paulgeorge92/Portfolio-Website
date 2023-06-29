@@ -483,6 +483,10 @@ img {
     margin-bottom: var(--mb-2-5);
 }
 
+.certifications__slider{
+    margin-bottom: var(--mb-2-5);
+}
+
 .about__info-title {
     font-size: var(--h2-font-size);
     font-weight: var(--font-semi-bold);
