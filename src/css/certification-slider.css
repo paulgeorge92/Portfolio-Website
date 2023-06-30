@@ -33,6 +33,10 @@
     transform:rotateZ(180deg);
   }
   
+  .certifications__slider:hover{
+    animation-play-state: paused;
+  }
+  
   /*  IMPORTANT CODE BELOW */
   
   .certifications__slide-track {
@@ -40,7 +44,7 @@
     display: flex;
     animation: certifications__scroll var(--certification-speed) linear infinite;
     justify-content: space-between;
-    gap: 20px;
+    gap: 5px;
   }
   
   
